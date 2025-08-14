@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Listing</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Product Listing</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="todo.html">To-Do List</a>
+    </nav>
+  </header>
+  <main>
+    <div>
+      <label>Filter by Category: 
+        <select id="categoryFilter" onchange="filterProducts()">
+          <option value="all">All</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+        </select>
+      </label>
+
+      <label>Sort by Rating: 
+        <select id="sortRating" onchange="filterProducts()">
+          <option value="desc">High to Low</option>
+          <option value="asc">Low to High</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="productList" class="product-grid"></div>
+  </main>
+
+<script>
+// ====================== Product Data ======================
+const products = [
+  // Electronics
+  { name: 'Laptop', category: 'electronics', rating: 4.8 },
+  { name: 'Phone', category: 'electronics', rating: 4.6 },
+  { name: 'Headphones', category: 'electronics', rating: 4.7 },
+  { name: 'Smart Watch', category: 'electronics', rating: 4.5 },
+  { name: 'Tablet', category: 'electronics', rating: 4.6 },
+  { name: 'Bluetooth Speaker', category: 'electronics', rating: 4.4 },
+  { name: 'Gaming Console', category: 'electronics', rating: 4.9 },
+  { name: 'Monitor', category: 'electronics', rating: 4.3 },
+  { name: 'External Hard Drive', category: 'electronics', rating: 4.2 },
+  { name: 'Wireless Mouse', category: 'electronics', rating: 4.1 },
+
+  // Clothing
+  { name: 'Shirt', category: 'clothing', rating: 4.2 },
+  { name: 'Jeans', category: 'clothing', rating: 4.1 },
+  { name: 'Jacket', category: 'clothing', rating: 4.3 },
+  { name: 'Sneakers', category: 'clothing', rating: 4.4 },
+  { name: 'Cap', category: 'clothing', rating: 4.0 },
+  { name: 'Hoodie', category: 'clothing', rating: 4.5 },
+  { name: 'Dress', category: 'clothing', rating: 4.6 },
+  { name: 'Scarf', category: 'clothing', rating: 4.1 },
+  { name: 'Socks', category: 'clothing', rating: 4.0 },
+  { name: 'Belt', category: 'clothing', rating: 4.2 },
+
+  // Home Appliances
+  { name: 'Microwave Oven', category: 'home', rating: 4.5 },
+  { name: 'Vacuum Cleaner', category: 'home', rating: 4.3 },
+  { name: 'Air Conditioner', category: 'home', rating: 4.7 },
+  { name: 'Refrigerator', category: 'home', rating: 4.8 },
+  { name: 'Washing Machine', category: 'home', rating: 4.6 },
+
+  // Books
+  { name: 'Science Fiction Novel', category: 'books', rating: 4.5 },
+  { name: 'Cookbook', category: 'books', rating: 4.3 },
+  { name: 'Self-Help Guide', category: 'books', rating: 4.4 },
+
+  // Beauty
+  { name: 'Perfume', category: 'beauty', rating: 4.2 },
+
+  // Kitchen
+  { name: 'Non-Stick Pan', category: 'kitchen', rating: 4.6 }
+];
+
+// Capitalizes first letter
+function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// Populate category dropdown dynamically
+function generateCategoryOptions() {
+  const categoryFilter = document.getElementById('categoryFilter');
+  if (!categoryFilter) return;
+
+  const categories = ['all', ...new Set(products.map(p => p.category))];
+  categoryFilter.innerHTML = categories
+    .map(cat => `<option value="${cat}">${capitalizeFirstLetter(cat)}</option>`)
+    .join('');
+}
+
+// Display products
+function displayProducts(items) {
+  const productList = document.getElementById('productList');
+  if (!productList) return;
+
+  productList.innerHTML = '';
+  items.forEach(product => {
+    const div = document.createElement('div');
+    div.className = 'product-card';
+    div.innerHTML = `
+      <h3>${product.name}</h3>
+      <p>Category: ${capitalizeFirstLetter(product.category)}</p>
+      <p>Rating: ⭐ ${product.rating}</p>
+    `;
+    productList.appendChild(div);
+  });
+}
+
+// Filter & sort products
+function filterProducts() {
+  const category = document.getElementById('categoryFilter').value;
+  const sort = document.getElementById('sortRating').value;
+
+  let filtered = [...products];
+
+  if (category !== 'all') {
+    filtered = filtered.filter(p => p.category === category);
+  }
+
+  filtered.sort((a, b) =>
+    sort === 'desc' ? b.rating - a.rating : a.rating - b.rating
+  );
+
+  displayProducts(filtered);
+}
+
+// Page initialization
+document.addEventListener('DOMContentLoaded', () => {
+  generateCategoryOptions();
+  filterProducts();
+});
+</script>
+</body>
+</html>
