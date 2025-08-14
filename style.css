@@ -1,0 +1,179 @@
+/* ========== GLOBAL STYLES ========== */
+:root {
+  --primary-color: #3a506b;
+  --secondary-color: #5bc0be;
+  --bg-gradient: linear-gradient(135deg, #d9e4ec, #a5c9ca);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --text-light: #f0f0f0;
+  --text-dark: #222;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+header {
+  background: var(--primary-color);
+  color: var(--text-light);
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--secondary-color);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  padding: 2em;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+/* PRODUCTS */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--glass-bg);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+/* TO-DO LIST */
+#taskInput {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 60%;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  background: var(--secondary-color);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #4aa8a5;
+  transform: scale(1.05);
+}
+
+ul {
+  margin-top: 20px;
+  list-style: none;
+}
+
+ul li {
+  background: var(--glass-bg);
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+ul li:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* SELECT FILTERS */
+select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  margin: 10px;
+  background: white;
+  color: var(--text-dark);
+}
+
+select option {
+  color: var(--text-dark);
+}
+
+/* FOOTER */
+footer {
+  background: var(--primary-color);
+  color: var(--text-light);
+  text-align: center;
+  padding: 1em;
+  font-size: 0.9rem;
+}
